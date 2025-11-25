@@ -128,6 +128,32 @@ html, body {
   100% { transform: translateX(-100%); }
 }
 
+.adsense-container {
+  min-width: 11rem;
+  max-width: 11rem;
+  margin-left: 1rem;
+  display: inline-block;
+  background-color: #011320;
+  border-radius: 8px;
+  padding: 0.5rem;
+  min-height: 11rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adsense-container-horizontal {
+  padding: 1rem 2rem;
+  background-color: #011320;
+  border-radius: 4px;
+  box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.1);
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
 
 
 
@@ -912,6 +938,88 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// Click handler for music items to open fullscreen player
+document.addEventListener('click', function(event) {
+    const musicConImg = event.target.closest('.music-con__img');
+    const musicHorItem = event.target.closest('.music-hor__item');
+
+    if (musicConImg || musicHorItem) {
+        const audioPlayerFullscreen = document.getElementById('audio-player-fullscreen');
+        if (audioPlayerFullscreen && audioPlayerFullscreen.classList.contains('hidden')) {
+            audioPlayerFullscreen.classList.remove('hidden');
+        }
+    }
+});
+
+// Function to insert AdSense ads after every 5 items
+function insertAdsenseAds() {
+    // Insert ads in music-con__list (vertical scrolling lists)
+    const musicConLists = document.querySelectorAll('.music-con__list');
+    musicConLists.forEach(list => {
+        const items = list.querySelectorAll('.music-con__item');
+        let insertedCount = 0;
+        items.forEach((item, index) => {
+            if ((index + 1) % 5 === 0 && index < items.length - 1) {
+                const adContainer = document.createElement('div');
+                adContainer.className = 'adsense-container';
+                adContainer.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+
+                if (item.nextSibling) {
+                    list.insertBefore(adContainer, item.nextSibling);
+                } else {
+                    list.appendChild(adContainer);
+                }
+                insertedCount++;
+            }
+        });
+    });
+
+    // Insert ads in music-hor__list (grid layout)
+    const musicHorList = document.querySelector('.music-hor__list');
+    if (musicHorList) {
+        const items = musicHorList.querySelectorAll('.music-hor__item');
+        let insertedCount = 0;
+        items.forEach((item, index) => {
+            if ((index + 1) % 5 === 0 && index < items.length - 1) {
+                const adContainer = document.createElement('div');
+                adContainer.className = 'adsense-container-horizontal';
+                adContainer.style.gridColumn = 'span 2';
+                adContainer.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+
+                if (item.nextSibling) {
+                    musicHorList.insertBefore(adContainer, item.nextSibling);
+                } else {
+                    musicHorList.appendChild(adContainer);
+                }
+                insertedCount++;
+            }
+        });
+    }
+
+    // Initialize AdSense ads if the script is loaded
+    if (window.adsbygoogle) {
+        const ads = document.querySelectorAll('.adsbygoogle');
+        ads.forEach(ad => {
+            if (!ad.hasAttribute('data-ad-slot')) {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (e) {
+                    console.log('AdSense error:', e);
+                }
+            }
+        });
+    }
+}
+
+// Call insertAdsenseAds after the DOM content is fully loaded and music items are generated
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(insertAdsenseAds, 1000);
+    });
+} else {
+    setTimeout(insertAdsenseAds, 1000);
+}
 
 
 </script>
