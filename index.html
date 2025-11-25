@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<meta name="description" content="Listen to the islamic nasheed to grow spiritually.">
+		<title>Islamic nasheed and qasida</title>
+<link href="familyMaterialIcons.css" rel="stylesheet">
+	<link href="quicksand.css" rel="stylesheet">
+	<link href="Teko.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+<style>
+html, body {
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.audio-player.hidden {
+    display: none;
+}
+
+.audio-player__btn-top.active {
+    color: #EB3700; /* Active state color */
+}
+
+.search-box {
+  position: fixed; /* Position it over the navbar */
+  right: 10px; /* Adjust the right position as needed */
+  top: 0!important; /* Position it at the top of the navbar */
+  z-index: 10; /* Ensure it appears above other navbar items */
+  width: fit-content;
+  height: 48px;
+  border-radius: 25px; /* Match the rounded corners */
+  padding: 5px; /* Add padding for some spacing */
+}
+
+#searchInput {
+  height: 48px;
+  width: 50px;
+  border-style: none;
+  padding: 10px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  outline: none;
+  border-radius: 25px;
+  transition: all 0.5s ease-in-out;
+  background-color: transparent;
+  padding-right: 40px;
+  color: #fff;
+  position: absolute;
+  right: 0; /* Align it with the button */
+  top: 0 !important; /* Align it with the button */
+}
+
+#searchInput::placeholder {
+  color: grey;
+  font-size: 18px;
+  letter-spacing: 2px;
+  font-weight: 100;
+  top: 0 !important;
+}
+
+.btn-search {
+  width: 50px;
+  height: 48px;
+  border-style: none;
+  font-size: 20px;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+  position: relative;
+  z-index: 5; /* Ensure the button is above the input */
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.btn-search:focus ~ #searchInput {
+  width: 200px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+}
+
+#searchInput:focus {
+  width: 200px;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
+  top: 0 !important;
+}
+
+  .music-controller{
+ transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    visibility: visible;
+  }
+
+  .music-controller.hidden {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+    #ad-banner {
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
+    }
+
+	.scrolling-text {
+  width: 8rem;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.scrolling-text h3 {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scrollText 5s linear infinite;
+}
+
+@keyframes scrollText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+
+
+
+
+  #fullscreenPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 20, 20, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    font-family: Arial, sans-serif;
+  }
+
+  .popup-content {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 90%;
+    width: 400px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    animation: popupFadeIn 0.5s ease-in-out;
+  }
+
+  .popup-content h1 {
+    margin: 0 0 15px;
+    font-size: 26px;
+    color: #222;
+  }
+
+  .popup-content p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #444;
+  }
+
+  .popup-content a {
+    display: inline-block;
+    background: #0077ff;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  @keyframes popupFadeIn {
+    from {opacity: 0; transform: scale(0.95);}
+    to {opacity: 1; transform: scale(1);}
+  }
+
+
+
+
+</style>
+</head>
+<body>
+<div id="fullscreenPopup">
+<div class="popup-content">
+  <h1>Get Offline Android App</h1>
+
+<button onclick="downloadFile()" 
+        onmouseout="this.style.backgroundColor='#007BFF'" 
+        onmouseover="this.style.backgroundColor='#0056b3'" 
+        style="background-color: #007bff; border-radius: 5px; border: none; color: white; cursor: pointer; font-size: 16px; padding: 10px 20px; transition: background-color 0.3s;">
+  Download Sasa 
+</button>
+
+<p id="downloadCount" style="margin-top: 10px; font-size: 14px; color: #666;"></p>
+  <br />  <br />  
+  
+
+  <!-- New Button to Show Installation Instructions -->
+  <button onclick="showInstallPopup2()" 
+          style="margin-top: 15px; background-color: #0f2819; border: none; color: white; border-radius: 5px; font-size: 15px; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s;">
+    Natumia Infinix Tecno au Itel
+  </button>
+  
+  <button onclick="showInstallPopup()" 
+          style="margin-top: 15px; background-color: #6c757d; border: none; color: white; border-radius: 5px; font-size: 15px; padding: 10px 20px; cursor: pointer; transition: background-color 0.3s;">
+    Situmii simu hizo
+  </button>
+  <br /><br /><br /><br />
+
+  <b>AU</b><br /><br />
+   <a download="https://apkpure.com/kaswida-za-kiswahili/com.gata.qaswiidat/download" href="https://apkpure.com/kaswida-za-kiswahili/com.gata.qaswiidat/download">Download from ApkPure</a>
+   <br /><br />
+<p style="font-size: 14px; color: #666; font-style: italic;">Unaweza kuipata pia katika appstore za Oppo, Vivo na Huawei. Haipo Google Playstore </p>
+</div>
+
+ 
+
+<!-- Modal Popup for Install Instructions -->
+<div id="installModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6);">
+  <div style="background-color: #1a1a1a; margin: 10% auto; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px; position: relative;">
+    <span onclick="closeInstallPopup()" 
+          style="position: absolute; top: 10px; right: 15px; font-size: 22px; font-weight: bold; color: #fff; cursor: pointer;">&times;</span>
+    
+    <h2 style="font-size: 18px; margin-bottom: 10px; color: #fff;">Jinsi ya kuinstall</h2>
+    <p style="font-size: 13.5px; color: #fff; font-style: italic;">Ikiwa hautumii infinix, Tecno au Itel, bonyeza button ya kwanza kudownload kisha fata hatua hizi kuinstall.</p>
+    
+    <!-- Replace with your image URL -->
+    <img src="img/1.jpg" alt="How to Install" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+	
+	  <img src="img/2.jpg" alt="How to Install" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+	  
+	    <img src="img/3.jpg" alt="How to Install" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+		  <img src="img/4.jpg" alt="How to Install" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+		    <img src="img/5.jpg" alt="How to Install" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+			
+			
+			
+  </div>
+  
+ 
+</div>
+
+
+<!-- Modal Popup for Install Instructions infinix tecno and itel -->
+<div id="installModal2" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6);">
+  <div style="background-color: #1a1a1a; margin: 10% auto; padding: 20px; border-radius: 10px; width: 90%; max-width: 400px; position: relative;">
+    <span onclick="closeInstallPopup2()" 
+          style="position: absolute; top: 10px; right: 15px; font-size: 22px; font-weight: bold; color: #fff; cursor: pointer;">&times;</span>
+    
+    <h2 style="font-size: 18px; margin-bottom: 10px; color: #fff;">Jinsi ya kuinstall</h2>
+    <p style="font-size: 13.5px; color: #fff; font-style: italic;">Kama unatumia simu ya Infinix, Tecno au Itel. Fungua app ya Palmstore iliyopo katika simu yako
+	kisha tafuta jina "Religion songs".. Itatokea App hii na utaweza kuinstall bila changamoto. </p>
+    
+    <!-- Replace with your image URL -->
+    <img src="img/palm.jpg" alt="How to Install" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+	
+	  <img src="img/palmstore.jpg" alt="How to Install" style="width: 100%; border-radius: 8px; margin-top: 10px;">
+	  
+			
+			
+  </div>
+  
+ 
+</div>
+
+</div>
+
+ <section class="loading-sec">
+
+            <h1 class="nav-sec__logo-inner">
+			<div class="loader"></div>
+                </span>
+            </h1>
+        </div>
+    </section>
+    <!-- Created Two Layout-Grid -->
+   <div class="main">
+            <!-- Navigation Section Start -->
+	  <nav class="navbar">
+    <span id="btn" class="material-icons">menu</span>
+	<div class="search-box">
+    <button class="btn-search"> <span class="material-icons">search</span></button>
+   <input type="text" id="searchInput" placeholder="Search..." />
+  </div>
+
+  </nav>
+  <div class="side-menu" id="menu">
+ <ul>
+ <!-- Rate us -->
+    <li>
+    <a href="#" id="rate-su" onclick="rateApp()">
+      <span class="material-icons">star_rate</span>Rate Us
+    </a>
+  </li>
+
+<!-- Privacy policy-->
+<li>
+    <a href="#" id="privacy" onclick="openPrivaceLink()">
+        <span class="material-icons">security</span>
+        Privacy
+    </a>
+</li>
+</ul>
+  </div>
+  <div class="back">
+
+  </div>
+            <section class="nav-sec">
+            </section>
+             <!-- Navigation Section End -->
+<br /><br /><br /><br />
+            <!-- Musics Section Start -->
+            <section class="music-sec">
+
+                <!-- Top Cover Start-->
+                <div class="cover">
+                     <img src="img/Apongezwe Mama.webp" alt="" class="cover__img">
+                     <div class="cover__text">
+                          <h1 class="cover__title">Qaswida</h1>
+                           <a href="#" class="btn cover__play-btn" id="recommended-play-btn">
+                                <span>Play Now</span>
+                                <span class="material-icons">
+                                play_circle_filled
+                               </span>
+                        </a>
+                     </div>
+                 </div>
+                 <!-- Top Cover End-->
+
+                 <div class="music-con">
+                      <h1 class="heading-sec">Ramadan Qaswida</h1>
+
+                    <!-- Music List Scroll Start-->
+                    <div class="music-con__list scroll-bar-hide">
+                    </div>
+
+                      <!-- Music List Scroll End-->
+                 </div>
+                 <div class="music-hor music-con">
+                   <h1 class="music-con__heading heading-sec">Nasheed</h1>
+                    <div class="music-hor__list">
+                    </div>
+                </div>
+                <div class="music-con">
+
+                    <h1 class="heading-sec">Wedding Qaswida</h1>
+                    <!-- Music List Scroll Start 2-->
+
+                    <div class="music-con__list scroll-bar-hide">
+
+                                              -->
+                    </div>
+                      <!-- Music List Scroll End 2-->
+                 </div>
+                      <!-- Music List Scroll End-->
+                 </div>
+                </div>
+                <div class="music-con">
+                    <!-- Music List Scroll Start 2-->
+                    <div class="music-con__list scroll-bar-hide">
+
+                                              -->
+
+                    </div>
+                      <!-- Music List Scroll End 2-->
+                 </div>
+
+            </section>
+            <!-- Musics Section End -->
+    </main>
+
+    <!-- Music { Play Btn  /  Progress Bar / }  Start-->
+    <section class="music-controller">
+                  <!-- Progress Bar-->
+		<div class="music-controller__progress-bar-wrapper">
+     <!-- Collapse Icon -->
+
+
+        <div class="music-controller__list">
+                <div class="music-controller__item">
+                    <img src="img/Apongezwe Mama.webp" alt="" class="music-controller__img audio-image">
+					<div class="scrolling-text">
+                       <h3 class="music-artist-name audio-name">Yaseen</h3>
+                        </div>
+
+                </div>
+                <div class="music-controller__item">
+<!--  skip prev -->
+                    <div class="music-controller__btn audio-prev-btn">
+                        <span class="material-icons">
+                            skip_previous
+                        </span>
+                    </div>
+<!--  Play button -->
+                    <div class="music-controller__btn audio-play-pause-btn">
+                        <span class="material-icons">
+                            play_circle_filled
+                           </span>
+                    </div>
+					<!--  skip next -->
+                    <div class="music-controller__btn audio-next-btn">
+                        <span class="material-icons">
+                            skip_next
+                        </span>
+
+                    </div>
+
+                </div>
+                <div class="music-controller__item phone-disable">
+
+                    <div class="music-controller__btn audio-shuffle">
+                        <span class="material-icons">
+                            shuffle
+                         </span>
+                    </div>
+                    <div class="music-controller__btn audio-volume">
+                        <span class="material-icons">
+                            volume_up
+                        </span>
+                    </div>
+                    <div class="music-controller__btn audio-repeat">
+                        <span class="material-icons">
+                            repeat
+                         </span>
+                    </div>
+
+                </div>
+        </div>
+    </section>
+
+  <!--- Open Music Player-->
+  <!--  Audio player -->
+<section class="audio-player hidden" id="audio-player-fullscreen">
+    <div class="audio-player__wrapper">
+        <img src="img/Apongezwe Mama.webp" alt="" class="audio-player__img audio-image">
+        <div class="audio-player__text">
+          <center>  <h3 class="heading-3 audio-name">Yaseen</h3> </center>
+            <p class="music-artist-name audio-singer-name">Yaseen</p>
+        </div>
+
+        <div class="audio-player__item audio-player__item--1">
+            <div class="audio-player__btn-top audio-shuffle">
+                <span class="material-icons">shuffle</span>
+            </div>
+            <div class="audio-player__btn-top audio-volume">
+                <span class="material-icons">volume_up</span>
+            </div>
+            <div class="audio-player__btn-top audio-repeat">
+                <span class="material-icons">repeat</span>
+            </div>
+        </div>
+
+        <div class="audio-player__timing-update">
+            <h3 class="audio-time" id="current-duration">01:06</h3>
+            <h3 class="audio-time" id="end-duration">03:45</h3>
+        </div>
+
+		<div class="audio-player__item">
+  <div class="audio-player__progress-bar_wrapper">
+
+      <div class="music-controller__progress-bar audio-player__progress-bar">
+        <span class="music-controller__progress-bar-fill"></span>
+      </div>
+
+  </div>
+</div>
+        <div class="audio-player__item audio-player__item--playBtn">
+            <div class="audio-player__btn-bottom audio-prev-btn">
+                <span class="material-icons">skip_previous</span>
+            </div>
+            <div class="audio-player__btn-bottom audio-play-pause-btn">
+                <span class="material-icons">play_circle_filled</span>
+            </div>
+            <div class="audio-player__btn-bottom audio-next-btn">
+                <span class="material-icons">skip_next</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+     <!-- Music { Play Btn  /  Progress Bar / }  End-->
+
+    <audio id="audio" class="audio" style="display: none;">
+    <source src="play/ramadan.mp3"></source>
+</audio>
+    <!-- Including External JavaScript File Here -->
+
+    <script src="script.js"></script>
+	<script src="fonts/hammer.min.js"></script>
+
+ <script src="fonts/jquery.min.js"></script>
+
+<!-- changes added script for menu-->
+  <script>
+const btn = document.getElementById("btn"); // The button element
+  const menu = document.querySelector(".side-menu"); // Optional: Link to the side menu if needed
+  const backOverlay = document.querySelector(".back"); // Optional: Link to the back overlay
+  let isMenuOpen = false; // Track the menu state
+
+  // Handle button click
+  btn.addEventListener("click", () => {
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+      btn.innerHTML = "arrow_back"; // Switch icon text
+      btn.classList.add("rotate"); // Add class for animation
+      menu?.classList.add("act"); // Optional: Open the side menu
+      backOverlay?.classList.add("act"); // Optional: Show overlay
+    } else {
+      btn.innerHTML = "menu"; // Switch icon text back
+      btn.classList.remove("rotate"); // Remove animation class
+      menu?.classList.remove("act"); // Optional: Close the side menu
+      backOverlay?.classList.remove("act"); // Optional: Hide overlay
+    }
+  });
+
+  // Optional: Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!btn.contains(e.target) && isMenuOpen && !menu?.contains(e.target)) {
+      isMenuOpen = false;
+      btn.innerHTML = "menu"; // Reset button text
+      btn.classList.remove("rotate"); // Reset animation
+      menu?.classList.remove("act"); // Close the side menu
+      backOverlay?.classList.remove("act"); // Hide overlay
+    }
+  });
+
+  // Optional: Close menu when clicking the overlay
+  backOverlay?.addEventListener("click", () => {
+    isMenuOpen = false;
+    btn.innerHTML = "menu"; // Reset button text
+    btn.classList.remove("rotate"); // Reset animation
+    menu?.classList.remove("act"); // Close the side menu
+    backOverlay?.classList.remove("act"); // Hide overlay
+  });
+</script>
+
+<!-- changes removed website2apk-->
+  <script>
+ class PlayedSongsStorage {
+    static storageKey = 'playedSongs';
+
+    // Save a played song to localStorage
+    static savePlayedSong(songUrl) {
+        const playedSongs = this.getPlayedSongs();
+        if (!playedSongs.includes(songUrl)) {
+            playedSongs.push(songUrl);
+            localStorage.setItem(this.storageKey, JSON.stringify(playedSongs));
+        }
+    }
+
+    // Retrieve all played songs from localStorage
+    static getPlayedSongs() {
+        const playedSongs = localStorage.getItem(this.storageKey);
+        return playedSongs ? JSON.parse(playedSongs) : [];
+    }
+
+
+}
+
+  </script>
+
+  
+<script>
+  // Rate Us Function
+  function rateApp() {
+    Website2APK.rateUs();
+  }
+
+//privacy policy
+	 function openPrivaceLink() {
+        Website2APK.openExternal("https://shagatas.blogspot.com/p/privacy-policy.html");
+    }
+
+
+</script>
+
+
+<script>
+
+// Add the 'loaded' class to the body after the page loads
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("loaded");
+});
+
+</script>
+<script>
+//control music controller when opening full full screen player
+// Get the elements by their class and ID
+const controllerItem = document.querySelector('.music-controller');
+const audioPlayer = document.getElementById('audio-player-fullscreen');
+
+// Add a click event listener to the progress bar wrapper
+controllerItem.addEventListener('click', function (event) {
+    // Check if the click originated from a button or its child elements
+    const isExcluded = event.target.closest('.audio-prev-btn, .audio-play-pause-btn, .audio-next-btn');
+
+    // If it's a button, stop propagation and do nothing
+    if (isExcluded) return;
+
+    // Toggle the 'hidden' class on the audio player section
+    audioPlayer.classList.toggle('hidden');
+});
+
+// Add explicit click event listeners for buttons to stop propagation
+const buttons = document.querySelectorAll('.audio-prev-btn, .audio-play-pause-btn, .audio-next-btn');
+buttons.forEach(button => {
+    button.addEventListener('click', function (event) {
+        // Stop the click event from propagating to the wrapper
+        event.stopPropagation();
+    });
+});
+
+// Select all control items (repeat, shuffle, etc.)
+const controlItems = document.querySelectorAll('.audio-player__btn-top');
+
+// Add click event to toggle the active state
+controlItems.forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+});
+</script>
+
+
+<script>
+//search from second list
+    // Artist search functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const artistElements = document.querySelectorAll('.music-hor__item');
+
+            artistElements.forEach(item => {
+                const artistName = item.querySelector('.music-artist-name').textContent.toLowerCase();
+                if (artistName.includes(query)) {
+                    item.style.display = ''; // Show matching item
+                } else {
+                    item.style.display = 'none'; // Hide non-matching item
+                }
+            });
+        });
+    }
+</script>
+
+
+
+<script>
+//search from const songs
+    const searchInput = document.getElementById('searchInput');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            const musicItems = document.querySelectorAll('.music-con__item');
+
+            musicItems.forEach(item => {
+                const artistName = item.querySelector('.music-artist-name')
+                    ? item.querySelector('.music-artist-name').textContent.toLowerCase()
+                    : '';
+
+                const headingText = item.querySelector('.heading-3')
+                    ? item.querySelector('.heading-3').textContent.toLowerCase()
+                    : '';
+
+                // Check if query matches artist name or heading text
+                if (artistName.includes(query) || headingText.includes(query)) {
+                    item.style.display = ''; // Show matching item
+                } else {
+                    item.style.display = 'none'; // Hide non-matching item
+                }
+            });
+        });
+    }
+</script>
+
+
+
+<script>
+
+
+// Hide music controller when search botton clicked
+
+const btnSearch = document.querySelector('.btn-search');
+
+    const musicController = document.querySelector('.music-controller');
+
+    // Hide music controller when search button is clicked
+    btnSearch.addEventListener('click', () => {
+      musicController.classList.add('hidden');
+    });
+
+    // Show music controller when clicking outside the search input
+    document.addEventListener('click', (event) => {
+      if (!searchInput.contains(event.target) && !btnSearch.contains(event.target)) {
+        musicController.classList.remove('hidden');
+      }
+    });
+
+    // Prevent reshowing when clicking on search button again
+    btnSearch.addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
+
+    // Prevent hiding or showing behavior when focusing inside the search input
+    searchInput.addEventListener('click', (event) => {
+      event.stopPropagation();
+    });
+
+	//hide navigation search menu when full player is active
+
+	// Select elements
+
+const searchBox = document.querySelector('.search-box');
+
+// Function to check and toggle the visibility of the search box
+function toggleSearchBox() {
+  // Check if the audio player has the "hidden" class or if its height is 0px
+  const isHidden = audioPlayer.classList.contains('hidden') || window.getComputedStyle(audioPlayer).height === '0px';
+
+  if (!isHidden) {
+    searchBox.style.display = 'none'; // Hide the search box when audio player is visible (100% height)
+  } else {
+    searchBox.style.display = 'block'; // Show the search box when audio player is hidden
+  }
+}
+
+// Add an observer to monitor class changes and height changes
+const mutationObserver = new MutationObserver(toggleSearchBox);
+mutationObserver.observe(audioPlayer, { attributes: true, attributeFilter: ['class'] });
+
+// Initial check
+toggleSearchBox();
+
+	//lock navigation bar so keyboard can't push it
+
+	function lockNavbarHeight() {
+    const navbar = document.querySelector('.navbar');
+    const navbarHeight = navbar.offsetHeight;
+    navbar.style.height = `${navbarHeight}px`;
+
+    window.addEventListener('resize', () => {
+        // Ensure keyboard resizing doesn't affect navbar
+        navbar.style.height = `${navbarHeight}px`;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', lockNavbarHeight);
+
+// Control back button exit on full screen
+
+document.addEventListener("DOMContentLoaded", function () {
+    let audioPlayer = document.getElementById("audio-player-fullscreen");
+
+    if (audioPlayer) {
+        window.history.pushState(null, null, window.location.href); // Push a new state
+
+        window.addEventListener("popstate", function (event) {
+            if (!audioPlayer.classList.contains("hidden")) {
+                event.preventDefault(); // Prevent app from exiting
+                audioPlayer.classList.add("hidden"); // Hide the player
+                window.history.pushState(null, null, window.location.href); // Push state again
+            } else {
+                window.history.back(); // Allow normal back behavior
+            }
+        });
+    }
+});
+
+//disable banner ad when keyboard is active
+
+ let originalHeight = window.innerHeight;
+    let adHidden = false;
+
+    function hideAdSmoothly() {
+        let adBanner = document.getElementById("ad-banner");
+        if (adBanner) {
+            adBanner.style.opacity = "0"; // Smooth fade out
+            setTimeout(() => Website2APK.enableShowBannerAd(false), 500); // Hide after fade-out
+        } else {
+            Website2APK.enableShowBannerAd(false); // Fallback if no element found
+        }
+    }
+
+    function showAdSmoothly() {
+        let adBanner = document.getElementById("ad-banner");
+        Website2APK.enableShowBannerAd(true);
+        if (adBanner) {
+            setTimeout(() => {
+                adBanner.style.opacity = "1"; // Smooth fade in
+            }, 100);
+        }
+    }
+
+    window.addEventListener('resize', function () {
+        if (window.innerHeight < originalHeight * 0.8) {
+            if (!adHidden) {
+                adHidden = true;
+                hideAdSmoothly();
+            }
+        } else {
+            if (adHidden) {
+                adHidden = false;
+                showAdSmoothly();
+            }
+        }
+    });
+
+//contol interstitial ads
+document.addEventListener("DOMContentLoaded", function () {
+    let lastAdTime = 0;
+
+    function showAdIfReady() {
+        const currentTime = Date.now();
+        if (currentTime - lastAdTime >= 60000) { // 60 seconds
+            if (typeof Website2APK !== "undefined" && typeof Website2APK.showInterstitialAd === "function") {
+                Website2APK.showInterstitialAd();
+                lastAdTime = currentTime; // Update last shown time
+            }
+        }
+    }
+
+    function prefetchAd() {
+        if (typeof Website2APK !== "undefined" && typeof Website2APK.prefetchInterstitialAd === "function") {
+            Website2APK.prefetchInterstitialAd();
+        }
+    }
+
+    // Prefetch ad on page load
+    prefetchAd();
+
+    // Event delegation: Listen for clicks on dynamically generated elements
+    document.body.addEventListener("click", function (event) {
+        if (event.target.closest(".music-hor__item, .music-con__item")) {
+            showAdIfReady();
+        }
+    });
+
+    // Periodically prefetch the ad to ensure availability
+    setInterval(prefetchAd, 60000);
+});
+
+
+//make progress fill draggable
+document.addEventListener("DOMContentLoaded", function () {
+    const progressBarWrapper = document.querySelector(".audio-player__progress-bar_wrapper");
+    const progressBar = document.querySelector(".audio-player__progress-bar");
+    const progressFill = document.querySelector(".music-controller__progress-bar-fill");
+    const player = document.querySelector("audio"); // Reference the audio player
+
+    let isDragging = false;
+
+    function updateProgress(event) {
+        const rect = progressBar.getBoundingClientRect();
+        const offsetX = event.type.includes("touch") ? event.touches[0].clientX - rect.left : event.clientX - rect.left;
+        let percent = (offsetX / rect.width) * 100;
+        percent = Math.max(0, Math.min(100, percent)); // Ensure within bounds
+        progressFill.style.width = percent + "%";
+
+        if (player.duration) {
+            player.currentTime = (percent / 100) * player.duration; // Update actual audio position live
+        }
+    }
+
+    progressBarWrapper.addEventListener("mousedown", (event) => {
+        isDragging = true;
+        updateProgress(event);
+    });
+
+    document.addEventListener("mousemove", (event) => {
+        if (isDragging) {
+            updateProgress(event);
+        }
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+    });
+
+    // Support for touch events
+    progressBarWrapper.addEventListener("touchstart", (event) => {
+        isDragging = true;
+        updateProgress(event);
+    });
+
+    document.addEventListener("touchmove", (event) => {
+        if (isDragging) {
+            updateProgress(event);
+        }
+    });
+
+    document.addEventListener("touchend", () => {
+        isDragging = false;
+    });
+
+    // Keep progress bar updated with audio time
+    player.addEventListener("timeupdate", () => {
+        if (!isDragging) {
+            let percent = (player.currentTime / player.duration) * 100;
+            progressFill.style.width = percent + "%";
+        }
+    });
+});
+
+
+</script>
+
+
+</body>
+</html>
