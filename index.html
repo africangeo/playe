@@ -7,6 +7,8 @@
 
 <meta name="description" content="Listen to the islamic nasheed to grow spiritually.">
 		<title>Islamic nasheed and qasida</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5798059989703661"
+     crossorigin="anonymous"></script>
 <link href="familyMaterialIcons.css" rel="stylesheet">
 	<link href="quicksand.css" rel="stylesheet">
 	<link href="Teko.css" rel="stylesheet">
@@ -957,58 +959,41 @@ function insertAdsenseAds() {
     // Insert ads in music-con__list (vertical scrolling lists)
     const musicConLists = document.querySelectorAll('.music-con__list');
     musicConLists.forEach(list => {
-        const items = list.querySelectorAll('.music-con__item');
-        let insertedCount = 0;
-        items.forEach((item, index) => {
-            if ((index + 1) % 5 === 0 && index < items.length - 1) {
-                const adContainer = document.createElement('div');
-                adContainer.className = 'adsense-container';
-                adContainer.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+        const items = list.querySelectorAll(':scope > .music-con__item');
+        const itemsArray = Array.from(items);
 
-                if (item.nextSibling) {
-                    list.insertBefore(adContainer, item.nextSibling);
-                } else {
-                    list.appendChild(adContainer);
-                }
-                insertedCount++;
-            }
-        });
+        for (let i = 4; i < itemsArray.length; i += 6) {
+            const adContainer = document.createElement('div');
+            adContainer.className = 'adsense-container';
+            adContainer.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5798059989703661" data-ad-slot="7119423212" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+
+            itemsArray[i].parentNode.insertBefore(adContainer, itemsArray[i].nextSibling);
+        }
     });
 
     // Insert ads in music-hor__list (grid layout)
     const musicHorList = document.querySelector('.music-hor__list');
     if (musicHorList) {
-        const items = musicHorList.querySelectorAll('.music-hor__item');
-        let insertedCount = 0;
-        items.forEach((item, index) => {
-            if ((index + 1) % 5 === 0 && index < items.length - 1) {
-                const adContainer = document.createElement('div');
-                adContainer.className = 'adsense-container-horizontal';
-                adContainer.style.gridColumn = 'span 2';
-                adContainer.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+        const items = musicHorList.querySelectorAll(':scope > .music-hor__item');
+        const itemsArray = Array.from(items);
 
-                if (item.nextSibling) {
-                    musicHorList.insertBefore(adContainer, item.nextSibling);
-                } else {
-                    musicHorList.appendChild(adContainer);
-                }
-                insertedCount++;
-            }
-        });
+        for (let i = 4; i < itemsArray.length; i += 6) {
+            const adContainer = document.createElement('div');
+            adContainer.className = 'adsense-container-horizontal';
+            adContainer.style.gridColumn = 'span 2';
+            adContainer.innerHTML = '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5798059989703661" data-ad-slot="7119423212" data-ad-format="auto" data-full-width-responsive="true"></ins>';
+
+            itemsArray[i].parentNode.insertBefore(adContainer, itemsArray[i].nextSibling);
+        }
     }
 
-    // Initialize AdSense ads if the script is loaded
-    if (window.adsbygoogle) {
-        const ads = document.querySelectorAll('.adsbygoogle');
-        ads.forEach(ad => {
-            if (!ad.hasAttribute('data-ad-slot')) {
-                try {
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {
-                    console.log('AdSense error:', e);
-                }
-            }
-        });
+    // Initialize AdSense ads
+    if (window.adsbygoogle !== undefined) {
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.log('AdSense init:', e);
+        }
     }
 }
 
